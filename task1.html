@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>جدول شركة — المبرمجين المحدودة</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root{
+      --bg:#0f172a;           /* slate-900 */
+      --card:#111827ee;       /* gray-900 */
+      --text:#e5e7eb;         /* gray-200 */
+      --muted:#94a3b8;        /* slate-400 */
+      --accent:#22d3ee;       /* cyan-400 */
+      --accent-2:#60a5fa;     /* blue-400 */
+      --row:#0b1229;          /* dark row */
+      --row-alt:#0d1533;      /* dark row alt */
+      --border:#1f2937;       /* gray-800 */
+      --good:#10b981;         /* green-500 */
+    }
+
+    html,body{height:100%;}
+    body{
+      margin:0; font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: linear-gradient(180deg, var(--bg), #0b1022 60%);
+      color:var(--text);
+      display:flex; align-items:center; justify-content:center; padding:24px;
+    }
+
+    .container{
+      width: min(1100px, 100%);
+    }
+
+    .card{
+      background: radial-gradient(1200px 600px at 100% -10%, #1e293b44, transparent), var(--card);
+      border:1px solid var(--border);
+      border-radius:16px; box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      overflow:hidden;
+    }
+
+    .header{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:20px 22px; border-bottom:1px solid var(--border);
+      background:linear-gradient(90deg, #0b1022 0%, #0d1533 50%, #0b1022 100%);
+    }
+    .title{font-size:1.25rem; font-weight:700; letter-spacing:.2px;}
+    .subtitle{font-size:.9rem; color:var(--muted)}
+
+    .tools{display:flex; gap:10px; align-items:center;}
+    .tool-input{
+      background:#0b1229; color:var(--text); border:1px solid var(--border);
+      padding:10px 12px; border-radius:10px; outline:none; width:220px;
+    }
+    .tool-select{ appearance:none; }
+
+    .badge{font-size:.8rem; color:#07121a; background:linear-gradient(90deg, var(--accent), var(--accent-2)); padding:6px 10px; border-radius:999px; font-weight:700}
+
+    .table-wrap{overflow-x:auto;}
+    table{ width:100%; border-collapse:separate; border-spacing:0; min-width:720px; }
+
+    thead th{
+      text-align:right; font-weight:800; letter-spacing:.3px; font-size:.9rem;
+      background:#0a132c; color:#dbeafe; position:sticky; top:0; z-index:1;
+      border-bottom:1px solid var(--border);
+      padding:14px 16px;
+    }
+
+    tbody tr{ transition: background .2s ease; }
+    tbody tr:nth-child(odd){ background: var(--row); }
+    tbody tr:nth-child(even){ background: var(--row-alt); }
+    tbody tr:hover{ background:#0f1a3a; }
+
+    td{
+      padding:14px 16px; border-bottom:1px solid var(--border); font-size:.95rem;
+    }
+
+    .pos{ color:#a5b4fc; font-weight:700; }
+    .gender{ color:#c7d2fe; }
+    .salary{ font-variant-numeric: tabular-nums; font-weight:700; }
+
+    .footer{ display:flex; justify-content:space-between; align-items:center; padding:14px 16px; color:var(--muted); font-size:.85rem; }
+
+    /* Responsive tweaks */
+    @media (max-width: 640px){
+      .tools{ flex-wrap:wrap; }
+      .tool-input{ width:100%; }
+    }
+  </style>
+  <!-- Tajawal font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div>
+        <div class="title">جدول شركة - المبرمجين المحدودة</div>
+          <div class="subtitle">قائمة الموظفين: الاسم، العمر، المنصب، الجنس، والراتب الشهري</div>
+        </div>
+        <div class="tools">
+          <input id="search" class="tool-input" type="search" placeholder="ابحث بالاسم أو المنصب…" oninput="filterTable()" />
+          <span class="badge">محاسبة</span>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="employees">
+          <thead>
+            <tr>
+              <th>الاسم</th>
+              <th>العمر</th>
+              <th>المنصب</th>
+              <th>الجنس</th>
+              <th>الراتب (جنيه)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> mo3az </td>
+              <td>25</td>
+              <td class="pos">firebase</td>
+              <td class="gender">ذكر</td>
+              <td class="salary">100,500</td>
+            </tr>
+            <tr>
+              <td> Bebo </td>
+              <td>22</td>
+              <td class="pos">frontent devoleper</td>
+              <td class="gender">أنثى</td>
+              <td class="salary">100,200</td>
+            </tr>
+            <tr>
+              <td>Zoz.el3arb</td>
+              <td>22</td>
+              <td class="pos">frontend devoleper</td>
+              <td class="gender">ذكر</td>
+              <td class="salary">100,800</td>
+            </tr>
+            <tr>
+              <td> Mona </td>
+              <td>22</td>
+              <td class="pos">database</td>
+              <td class="gender">أنثى</td>
+              <td class="salary">100,300</td>
+            </tr>
+            <tr>
+                <td>carolien</td>
+                <td>7</td>
+                <td class="pos">database</td>
+              <td class="gender">انثي</td>
+              <td class="salary">100,000</td>
+            </tr>
+            <tr>
+              <td> mai </td>
+              <td>23</td>
+              <td class="pos">firebase</td>
+              <td class="gender">أنثى</td>
+              <td class="salary">100,900</td>
+            </tr>
+            <tr>
+              <td> sohaila </td>
+              <td>22</td>
+              <td class="pos">frontend devoleper</td>
+              <td class="gender">انثي</td>
+              <td class="salary">100,600</td>
+            </tr>
+            <tr>
+              <td>Hussam</td>           
+              <td>9</td>
+              <td class="pos">devOps</td>
+              <td class="gender">ذكر</td>
+              <td class="salary">100.000</td>
+            </tr>
+            <tr>
+                 <td>Sulliy</td>
+                <td>22</td>
+                <td class="pos">firebase</td>
+              <td class="gender">انثي</td>
+              <td class="salary">100,000</td>
+            </tr>
+            <tr>
+                 <td>Nour</td>
+                <td>22</td>
+                <td class="pos">qa/testing/planning</td>
+              <td class="gender">انثي</td>
+              <td class="salary">100,000</td>
+            </tr>
+            <tr>
+
+            </trdiv>
+          </tbody>
+        </table>
+
+
+      <div class="footer">
+        <span>آخر تحديث: 2025-08-24</span>
+        <span>نصائح: يمكنك النسخ واللصق والتعديل مباشرة.</span>
+      </div>
+    </div>
+  </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
